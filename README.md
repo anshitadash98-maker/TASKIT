@@ -1,4 +1,5 @@
-# Taskora — C2 Task Tracker
+# Taskit
+— C2 Task Tracker
 
 A high-performance, cinematic task management application built exclusively with **Vanilla HTML5, CSS3, and JavaScript** on the frontend, powered by **Node.js, Express.js, and SQLite** on the backend.
 
