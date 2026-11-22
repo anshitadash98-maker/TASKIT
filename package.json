@@ -1,8 +1,11 @@
 {
   "name": "taskora-c2",
   "version": "1.0.0",
-  "description": "Taskora - C2 Task Management & Productivity Tracker",
+  "description": "TASKIT - Modern SaaS Productivity Dashboard",
   "main": "server.js",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js"

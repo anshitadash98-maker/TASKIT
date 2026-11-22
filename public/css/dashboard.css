@@ -1,32 +1,40 @@
 /* ==========================================================================
    TASKIT — Modern SaaS Productivity Dashboard Styles
    Theme: Minimalist, Premium, Clean & Spacious
-   Canvas: Warm Off-White / Ivory (#faf9f6)
+   Canvas: Crisp Cool Slate (#f8fafc)
    Sidebar & Cards: Crisp White (#ffffff)
-   Accents: Warm Amber (#f59e0b, #d97706), Soft Green (#16a34a), Soft Red (#dc2626)
+   Accents: Royal Purple & Electric Indigo Blue (#6366f1, #8b5cf6, #7c3aed)
    Strict Vanilla CSS3 — Zero Frameworks
    ========================================================================== */
 
 :root {
   /* Canvas & Neutral Surface Colors */
-  --bg-canvas: #faf9f6;          /* Warm off-white / ivory */
+  --bg-canvas: #f8fafc;          /* Modern crisp cool slate canvas */
   --bg-sidebar: #ffffff;         /* Clean pure white */
   --bg-card: #ffffff;            /* Crisp white cards */
-  --bg-subtle: #f4f3ef;          /* Soft ivory neutral */
-  --bg-hover: #f7f6f2;           /* Subtle card hover tint */
+  --bg-subtle: #f1f5f9;          /* Soft slate neutral */
+  --bg-hover: #f8fafc;           /* Subtle card hover tint */
 
   /* Text & Typography Colors */
-  --text-primary: #18181b;       /* Dark charcoal */
-  --text-secondary: #52525b;     /* Muted slate-grey */
-  --text-tertiary: #a1a1aa;      /* Subtle placeholder grey */
-  --border-light: #e7e5e0;       /* Refined light border */
-  --border-subtle: #f0eee9;      /* Ultra subtle divider */
+  --text-primary: #0f172a;       /* Deep slate charcoal */
+  --text-secondary: #475569;     /* Slate grey */
+  --text-tertiary: #94a3b8;      /* Subtle placeholder grey */
+  --border-light: #e2e8f0;       /* Refined light border */
+  --border-subtle: #f1f5f9;      /* Ultra subtle divider */
 
-  /* Accent Colors */
-  --amber-primary: #d97706;      /* Rich warm amber */
-  --amber-accent: #f59e0b;       /* Golden yellow */
-  --amber-light: #fffbeb;        /* Soft amber tint */
-  --amber-border: #fde68a;       /* Amber accent border */
+  /* Purple & Electric Blue Accent Palette */
+  --amber-primary: #6366f1;      /* Electric Indigo / Purple */
+  --amber-accent: #8b5cf6;       /* Radiant Violet / Purple */
+  --amber-light: #f5f3ff;        /* Soft lavender / purple-tint background */
+  --amber-border: #ddd6fe;       /* Subtle violet-purple border */
+
+  /* Dedicated Purple & Blue System Tokens */
+  --purple-primary: #7c3aed;     /* Royal Purple */
+  --purple-accent: #a855f7;      /* Bright Purple */
+  --blue-primary: #3b82f6;       /* Electric Blue */
+  --blue-accent: #60a5fa;        /* Light Sky Blue */
+  --purple-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #7c3aed 100%);
+  --blue-purple-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
 
   /* Semantic Feedback */
   --success-text: #15803d;       /* Soft green text */
@@ -37,9 +45,9 @@
   --overdue-bg: #fef2f2;         /* Soft red background */
   --overdue-border: #fecaca;     /* Soft red border */
 
-  --pending-text: #0284c7;       /* Soft sky blue */
-  --pending-bg: #f0f9ff;
-  --pending-border: #bae6fd;
+  --pending-text: #2563eb;       /* Royal Blue */
+  --pending-bg: #eff6ff;
+  --pending-border: #bfdbfe;
 
   /* Typography */
   --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -52,11 +60,11 @@
   --radius-full: 9999px;
 
   /* Soft Ambient Shadows */
-  --shadow-subtle: 0 1px 3px 0 rgba(28, 25, 23, 0.04), 0 1px 2px -1px rgba(28, 25, 23, 0.02);
-  --shadow-card: 0 4px 10px -1px rgba(28, 25, 23, 0.05), 0 2px 4px -2px rgba(28, 25, 23, 0.03);
-  --shadow-hover: 0 12px 24px -4px rgba(28, 25, 23, 0.08), 0 4px 8px -3px rgba(28, 25, 23, 0.03);
-  --shadow-modal: 0 25px 50px -12px rgba(28, 25, 23, 0.22);
-  --shadow-button: 0 4px 14px rgba(217, 119, 6, 0.28);
+  --shadow-subtle: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.02);
+  --shadow-card: 0 4px 10px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.03);
+  --shadow-hover: 0 12px 24px -4px rgba(15, 23, 42, 0.08), 0 4px 8px -3px rgba(15, 23, 42, 0.03);
+  --shadow-modal: 0 25px 50px -12px rgba(15, 23, 42, 0.22);
+  --shadow-button: 0 4px 14px rgba(99, 102, 241, 0.35);
 }
 
 /* ==========================================================================
@@ -223,12 +231,12 @@ html, body {
   width: 36px;
   height: 36px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--amber-accent) 0%, var(--amber-primary) 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.25);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
   flex-shrink: 0;
 }
 
@@ -326,7 +334,7 @@ html, body {
 }
 
 .nav-item.is-active .nav-badge {
-  background-color: rgba(245, 158, 11, 0.22);
+  background-color: rgba(99, 102, 241, 0.18);
   color: var(--amber-primary);
 }
 
@@ -413,8 +421,8 @@ html, body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #fef3c7 0%, var(--amber-accent) 100%);
-  color: var(--amber-primary);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -422,7 +430,7 @@ html, body {
   font-size: 0.875rem;
   flex-shrink: 0;
   border: 1.5px solid #ffffff;
-  box-shadow: var(--shadow-subtle);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
 }
 
 .user-meta {
@@ -543,8 +551,8 @@ html, body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--amber-light) 0%, var(--amber-accent) 100%);
-  color: var(--amber-primary);
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -698,9 +706,9 @@ html, body {
 }
 
 .btn-primary-amber:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #b45309 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
   transform: translateY(-1.5px);
-  box-shadow: 0 8px 18px rgba(217, 119, 6, 0.32);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.45);
 }
 
 .btn-primary-amber:active {
@@ -740,7 +748,7 @@ html, body {
 .toolbar-search:focus-within {
   border-color: var(--amber-primary);
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
 }
 
 .search-icon {
@@ -1485,7 +1493,7 @@ html, body {
   gap: 0.45rem;
   height: 38px;
   padding: 0 0.95rem;
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
   color: var(--amber-primary);
   border: 1px solid var(--amber-border);
   border-radius: var(--radius-full);
@@ -1493,13 +1501,13 @@ html, body {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.12);
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.15);
 }
 
 .btn-ai-header:hover {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.22);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
 .nav-item-ai {
@@ -1507,14 +1515,14 @@ html, body {
 }
 
 .nav-item-ai.is-active {
-  background: linear-gradient(90deg, #fffbeb 0%, #fef3c7 100%);
+  background: linear-gradient(90deg, #f5f3ff 0%, #ede9fe 100%);
   border-color: var(--amber-border);
 }
 
 .nav-badge-ai {
-  background: linear-gradient(135deg, var(--amber-accent) 0%, var(--amber-primary) 100%);
+  background: linear-gradient(135deg, var(--amber-primary) 0%, var(--amber-accent) 100%);
   color: #ffffff !important;
-  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.35);
 }
 
 .tasks-action-group {
@@ -1582,12 +1590,12 @@ html, body {
   width: 48px;
   height: 48px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--amber-accent) 0%, var(--amber-primary) 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 18px rgba(99, 102, 241, 0.45);
   flex-shrink: 0;
 }
 
@@ -1886,7 +1894,7 @@ html, body {
 }
 
 .btn-accept-rec:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #b45309 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
   transform: translateY(-1px);
 }
 
@@ -1902,7 +1910,7 @@ html, body {
 }
 
 .btn-dismiss-rec:hover {
-  background-color: #e5e4de;
+  background-color: #e2e8f0;
 }
 
 /* AI Plan My Day Schedule View */
@@ -1915,7 +1923,7 @@ html, body {
 
 .schedule-header-box {
   padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
   border: 1px solid var(--amber-border);
   border-radius: var(--radius-md);
   font-size: 0.85rem;
@@ -2074,7 +2082,7 @@ html, body {
 .ai-input-wrapper:focus-within {
   border-color: var(--amber-primary);
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.16);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .ai-text-input {
@@ -2095,7 +2103,7 @@ html, body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--amber-accent) 0%, var(--amber-primary) 100%);
+  background: linear-gradient(135deg, var(--amber-primary) 0%, var(--amber-accent) 100%);
   color: #ffffff;
   border: none;
   cursor: pointer;
@@ -2103,13 +2111,13 @@ html, body {
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.35);
   flex-shrink: 0;
 }
 
 .ai-send-btn:hover {
   transform: scale(1.06);
-  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.45);
 }
 
 .ai-send-btn:active {

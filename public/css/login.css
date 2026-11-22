@@ -1,22 +1,22 @@
 /* ==========================================================================
-   Taskora - Cinematic Visual Design System & Login Styles
-   Theme: Golden Glass Skyscrapers at Sunset
+   TASKIT - Modern Visual Design System & Login Styles
+   Theme: Electric Purple & Deep Royal Blue Ambiance
    Strict Vanilla CSS3 — Zero Frameworks
    ========================================================================== */
 
 :root {
-  /* Amber / Golden Palette */
-  --amber-50: #fffbeb;
-  --amber-100: #fef3c7;
-  --amber-200: #fde68a;
-  --amber-300: #fcd34d;
-  --amber-400: #fbbf24;
-  --amber-500: #f59e0b;
-  --amber-600: #d97706;
-  --amber-700: #b45309;
-  --amber-800: #92400e;
-  --amber-900: #78350f;
-  --amber-950: #451a03;
+  /* Purple & Electric Blue Palette */
+  --amber-50: #f5f3ff;
+  --amber-100: #ede9fe;
+  --amber-200: #ddd6fe;
+  --amber-300: #c4b5fd;
+  --amber-400: #a78bfa;
+  --amber-500: #8b5cf6;
+  --amber-600: #6366f1;
+  --amber-700: #4f46e5;
+  --amber-800: #4338ca;
+  --amber-900: #3730a3;
+  --amber-950: #1e1b4b;
 
   /* Neutral Surface Palette */
   --card-bg: #ffffff;
@@ -24,7 +24,7 @@
   --text-muted: #64748b;
   --text-light: #f8fafc;
   --border-light: #e2e8f0;
-  --border-focus: #f59e0b;
+  --border-focus: #6366f1;
   --error-color: #ef4444;
   --success-color: #10b981;
 
@@ -36,8 +36,8 @@
   --radius-full: 9999px;
 
   /* Elevation Shadows */
-  --shadow-card: 0 25px 60px -15px rgba(26, 12, 3, 0.4), 0 0 0 1px rgba(251, 191, 36, 0.15);
-  --shadow-button: 0 10px 25px -5px rgba(217, 119, 6, 0.4), 0 8px 10px -6px rgba(217, 119, 6, 0.2);
+  --shadow-card: 0 25px 60px -15px rgba(15, 23, 42, 0.5), 0 0 0 1px rgba(99, 102, 241, 0.2);
+  --shadow-button: 0 10px 25px -5px rgba(99, 102, 241, 0.45), 0 8px 10px -6px rgba(124, 58, 237, 0.3);
 }
 
 /* Base Reset */
@@ -101,14 +101,14 @@ html, body {
   inset: 0;
   background: linear-gradient(
     115deg,
-    rgba(14, 8, 3, 0.82) 0%,
-    rgba(20, 11, 4, 0.55) 45%,
-    rgba(26, 14, 5, 0.78) 100%
+    rgba(15, 23, 42, 0.88) 0%,
+    rgba(30, 27, 75, 0.68) 45%,
+    rgba(15, 23, 42, 0.9) 100%
   );
   pointer-events: none;
 }
 
-/* Subtle Golden Horizon Light Glow */
+/* Subtle Purple & Blue Horizon Light Glow */
 .bg-ambient-glow {
   position: absolute;
   bottom: 0;
@@ -117,8 +117,8 @@ html, body {
   height: 45%;
   background: radial-gradient(
     ellipse at 40% 100%,
-    rgba(245, 158, 11, 0.22) 0%,
-    rgba(180, 83, 9, 0.12) 40%,
+    rgba(99, 102, 241, 0.35) 0%,
+    rgba(139, 92, 246, 0.18) 40%,
     transparent 80%
   );
   pointer-events: none;
@@ -223,10 +223,10 @@ html, body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.85rem;
-  background: rgba(245, 158, 11, 0.16);
-  border: 1px solid rgba(251, 191, 36, 0.3);
+  background: rgba(99, 102, 241, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.35);
   border-radius: var(--radius-full);
-  color: var(--amber-300);
+  color: #c4b5fd;
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -239,8 +239,8 @@ html, body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: var(--amber-400);
-  box-shadow: 0 0 8px var(--amber-400);
+  background-color: #818cf8;
+  box-shadow: 0 0 8px #818cf8;
 }
 
 /* Headline */
@@ -255,7 +255,7 @@ html, body {
 }
 
 .brand-headline .highlight-amber {
-  background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 60%, #f59e0b 100%);
+  background: linear-gradient(135deg, #c4b5fd 0%, #818cf8 50%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -445,7 +445,7 @@ html, body {
 .form-input:focus {
   background-color: #ffffff;
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3.5px rgba(245, 158, 11, 0.16);
+  box-shadow: 0 0 0 3.5px rgba(99, 102, 241, 0.2);
 }
 
 .form-input:focus + .input-icon,
@@ -567,14 +567,14 @@ html, body {
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--amber-400) 0%, var(--amber-600) 100%);
+  background: linear-gradient(135deg, var(--amber-400) 0%, var(--amber-700) 100%);
   transform: translateY(-1.5px);
-  box-shadow: 0 14px 28px -6px rgba(217, 119, 6, 0.5), 0 10px 10px -5px rgba(217, 119, 6, 0.25);
+  box-shadow: 0 14px 28px -6px rgba(99, 102, 241, 0.5), 0 10px 10px -5px rgba(124, 58, 237, 0.3);
 }
 
 .btn-primary:active {
   transform: translateY(0.5px) scale(0.99);
-  box-shadow: 0 6px 14px -3px rgba(217, 119, 6, 0.4);
+  box-shadow: 0 6px 14px -3px rgba(99, 102, 241, 0.4);
 }
 
 .btn-primary:focus-visible {
