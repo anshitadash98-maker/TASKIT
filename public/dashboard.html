@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TASKIT — Smart Task Tracker & AI Productivity Assistant</title>
+  <meta name="description" content="TASKIT - Modern, minimalist, and premium SaaS task management application with AI-powered personal productivity assistant.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/taskora-logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Floating Toast Notification System -->
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Mobile Topbar with Drawer Trigger -->
+  <header class="mobile-topbar">
+    <div class="mobile-brand">
+      <div class="brand-logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">TASKIT</span>
+      </div>
+    </div>
+    <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle navigation menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile Sidebar Overlay Backdrop -->
+  <div id="sidebarOverlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+  <div class="app-layout">
+
+    <!-- =======================================================================
+         LEFT SIDEBAR: Fixed White Modern SaaS Navigation
+         ======================================================================= -->
+    <aside id="sidebar" class="sidebar">
+      
+      <!-- Brand Header -->
+      <div class="sidebar-header">
+        <div class="brand-logo-wrap">
+          <div class="brand-logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">TASKIT</span>
+            <span class="brand-tagline">AI Task Tracker</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Menu -->
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <div class="nav-group-title">Workspace</div>
+
+        <button class="nav-item" data-view="dashboard" id="navDashboard">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+            <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+            <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+            <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+          </svg>
+          <span class="nav-label">Dashboard</span>
+        </button>
+
+        <button class="nav-item is-active" data-view="tasks" id="navMyTasks">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <span class="nav-label">My Tasks</span>
+          <span class="nav-badge" id="navBadgeTotal">0</span>
+        </button>
+
+        <button class="nav-item" data-filter="today" id="navToday">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="nav-label">Today</span>
+          <span class="nav-badge nav-badge-amber" id="navBadgeToday">0</span>
+        </button>
+
+        <button class="nav-item" data-filter="upcoming" id="navUpcoming">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span class="nav-label">Upcoming</span>
+        </button>
+
+        <button class="nav-item" data-filter="completed" id="navCompleted">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <span class="nav-label">Completed</span>
+          <span class="nav-badge nav-badge-green" id="navBadgeDone">0</span>
+        </button>
+
+        <!-- AI Assistant Dedicated Tab -->
+        <div class="nav-group-title">AI Intelligence</div>
+        <button class="nav-item nav-item-ai" data-view="ai" id="navAiAssistant">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="8" width="18" height="12" rx="3.5"></rect>
+            <path d="M12 4v4"></path>
+            <circle cx="12" cy="3" r="1.2" fill="currentColor"></circle>
+            <circle cx="8.5" cy="13" r="1.5" fill="currentColor"></circle>
+            <circle cx="15.5" cy="13" r="1.5" fill="currentColor"></circle>
+            <path d="M9.5 16.5c1 .5 4 .5 5 0"></path>
+            <path d="M1.5 13h1.5"></path>
+            <path d="M21 13h1.5"></path>
+          </svg>
+          <span class="nav-label">TASKIT AI</span>
+          <span class="nav-badge nav-badge-ai">Smart</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Progress Widget -->
+      <div class="sidebar-productivity-box">
+        <div class="progress-title-row">
+          <span class="progress-label">Daily Progress</span>
+          <span class="progress-pct" id="sidebarProgressPct">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="sidebarProgressBar" style="width: 0%;"></div>
+        </div>
+        <p class="progress-hint" id="sidebarProgressHint">0 of 0 tasks completed</p>
+      </div>
+
+      <!-- User Profile & Logout -->
+      <div class="sidebar-footer">
+        <div class="user-profile-card">
+          <div class="user-avatar" id="sidebarAvatar">A</div>
+          <div class="user-meta">
+            <span class="user-name" id="sidebarUserName">Alex Vance</span>
+            <span class="user-email" id="sidebarUserEmail">alex@taskit.com</span>
+          </div>
+        </div>
+        <button id="logoutBtn" class="logout-btn" title="Sign out" aria-label="Sign out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- =======================================================================
+         MAIN WORKSPACE: Warm Off-White / Ivory Canvas
+         ======================================================================= -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="main-header">
+        <div class="header-welcome">
+          <h1 class="header-heading" id="headerGreeting">Good day!</h1>
+          <p class="header-subheading" id="headerSubheading">Let's make today productive and organized.</p>
+        </div>
+
+        <div class="header-right">
+          <div class="header-date-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span id="currentDateDisplay">Sunday, Nov 22, 2026</span>
+          </div>
+
+          <!-- Quick Launch AI Button in Topbar -->
+          <button id="headerQuickAiBtn" class="btn-ai-header" title="Open TASKIT AI Assistant">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="8" width="18" height="12" rx="3.5"></rect>
+              <path d="M12 4v4"></path>
+              <circle cx="12" cy="3" r="1.2" fill="currentColor"></circle>
+              <circle cx="8.5" cy="13" r="1.5" fill="currentColor"></circle>
+              <circle cx="15.5" cy="13" r="1.5" fill="currentColor"></circle>
+              <path d="M9.5 16.5c1 .5 4 .5 5 0"></path>
+              <path d="M1.5 13h1.5"></path>
+              <path d="M21 13h1.5"></path>
+            </svg>
+            <span>TASKIT AI</span>
+          </button>
+
+          <div class="header-user-pill">
+            <div class="header-avatar" id="headerAvatar">A</div>
+            <span class="header-username" id="headerUserNameDisplay">User</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Clean Subtle Divider -->
+      <div class="header-divider"></div>
+
+      <!-- =======================================================================
+           PANEL 1: TASKS VIEW PANEL (Existing Core Board & List)
+           ======================================================================= -->
+      <div id="tasksViewPanel" class="view-panel is-active">
+        
+        <!-- Task Statistics (4 Summary Cards) -->
+        <section class="stats-container" aria-label="Task summary statistics">
+          <div class="stat-card stat-total">
+            <div class="stat-icon-wrap icon-amber">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                <path d="M3 9h18"></path>
+                <path d="M9 21V9"></path>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Total Tasks</span>
+              <span class="stat-number" id="statTotalNumber">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card stat-completed">
+            <div class="stat-icon-wrap icon-green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Completed</span>
+              <span class="stat-number" id="statCompletedNumber">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card stat-pending">
+            <div class="stat-icon-wrap icon-blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Pending</span>
+              <span class="stat-number" id="statPendingNumber">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card stat-overdue">
+            <div class="stat-icon-wrap icon-red">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Overdue</span>
+              <span class="stat-number" id="statOverdueNumber">0</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- My Tasks Section -->
+        <section class="tasks-section">
+          <div class="tasks-section-header">
+            <div class="tasks-header-titles">
+              <h2 class="tasks-main-title" id="sectionTitleDisplay">My Tasks</h2>
+              <p class="tasks-main-subtext">Keep track of everything you need to get done.</p>
+            </div>
+
+            <div class="tasks-action-group">
+              <button id="quickNlpTaskBtn" class="btn-secondary-ai" title="Add tasks using natural language">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="8" width="18" height="12" rx="3.5"></rect>
+                  <path d="M12 4v4"></path>
+                  <circle cx="12" cy="3" r="1.2" fill="currentColor"></circle>
+                  <circle cx="8.5" cy="13" r="1.5" fill="currentColor"></circle>
+                  <circle cx="15.5" cy="13" r="1.5" fill="currentColor"></circle>
+                  <path d="M9.5 16.5c1 .5 4 .5 5 0"></path>
+                  <path d="M1.5 13h1.5"></path>
+                  <path d="M21 13h1.5"></path>
+                </svg>
+                <span>Natural Language Add</span>
+              </button>
+
+              <button id="openNewTaskBtn" class="btn-primary-amber">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Add New Task</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Toolbar: Search, Filters & Sorting -->
+          <div class="toolbar-card">
+            <div class="toolbar-search">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="searchInput" class="search-input" placeholder="Search tasks by title or notes..." autocomplete="off">
+              <button id="clearSearchBtn" class="clear-search-btn" style="display: none;" aria-label="Clear search">&times;</button>
+            </div>
+
+            <div class="toolbar-controls">
+              <div class="filter-group">
+                <label for="statusFilterSelect" class="filter-label">Status</label>
+                <select id="statusFilterSelect" class="toolbar-select">
+                  <option value="ALL">All</option>
+                  <option value="OPEN">Open</option>
+                  <option value="DONE">Done</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="priorityFilterSelect" class="filter-label">Priority</label>
+                <select id="priorityFilterSelect" class="toolbar-select">
+                  <option value="ALL">Any Priority</option>
+                  <option value="HIGH">High (Red)</option>
+                  <option value="MEDIUM">Medium (Amber)</option>
+                  <option value="LOW">Low (Green)</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="sortBySelect" class="filter-label">Sort</label>
+                <select id="sortBySelect" class="toolbar-select">
+                  <option value="createdAt">Created Date</option>
+                  <option value="dueDate">Due Date</option>
+                  <option value="priority">Priority</option>
+                </select>
+              </div>
+
+              <button id="sortDirectionToggleBtn" class="toolbar-btn-icon" title="Toggle Sort Order (Ascending / Descending)" aria-label="Toggle sort order">
+                <svg id="sortDescIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+                <svg id="sortAscIcon" style="display: none;" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="19" x2="12" y2="5"></line>
+                  <polyline points="5 12 12 5 19 12"></polyline>
+                </svg>
+              </button>
+
+              <button id="clearFiltersBtn" class="btn-clear-filters" style="display: none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                <span>Reset</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tasks Grid & Empty State -->
+          <div id="taskListContainer" class="task-list-wrapper">
+            <div id="tasksLoadingState" class="tasks-loading-wrap" style="display: none;">
+              <div class="loading-spinner"></div>
+              <span>Updating your tasks...</span>
+            </div>
+
+            <div id="tasksGrid" class="tasks-grid"></div>
+
+            <div id="emptyState" class="empty-state-card" style="display: none;">
+              <div class="empty-illustration">
+                <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </div>
+              <h3 class="empty-heading">Nothing on your list yet!</h3>
+              <p class="empty-subtext">Add your first task and start organizing your day.</p>
+              <button id="emptyCreateBtn" class="btn-primary-amber">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Create Your First Task</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- =======================================================================
+           PANEL 2: TASKIT AI PRODUCTIVITY ASSISTANT PANEL
+           ======================================================================= -->
+      <div id="aiAssistantPanel" class="view-panel">
+        
+        <div class="ai-assistant-container">
+          
+          <!-- AI Assistant Header -->
+          <div class="ai-header-card">
+            <div class="ai-header-brand">
+              <div class="ai-avatar-halo">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="8" width="18" height="12" rx="3.5"></rect>
+                  <path d="M12 4v4"></path>
+                  <circle cx="12" cy="3" r="1.2" fill="currentColor"></circle>
+                  <circle cx="8.5" cy="13" r="1.5" fill="currentColor"></circle>
+                  <circle cx="15.5" cy="13" r="1.5" fill="currentColor"></circle>
+                  <path d="M9.5 16.5c1 .5 4 .5 5 0"></path>
+                  <path d="M1.5 13h1.5"></path>
+                  <path d="M21 13h1.5"></path>
+                </svg>
+              </div>
+              <div class="ai-header-info">
+                <div class="ai-title-row">
+                  <h2 class="ai-main-title">TASKIT AI</h2>
+                  <span id="aiEngineBadge" class="ai-engine-badge">
+                    <span class="badge-dot"></span>
+                    <span>Checking AI Engine...</span>
+                  </span>
+                </div>
+                <p class="ai-sub-title">Your Personal Productivity Assistant</p>
+              </div>
+            </div>
+
+            <div class="ai-header-actions">
+              <button id="aiRefreshBtn" class="btn-ai-header-action" title="Re-analyze active tasks">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                </svg>
+                <span>Re-analyze</span>
+              </button>
+              <button id="aiClearChatBtn" class="btn-ai-header-action" title="Clear chat history">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                <span>Clear</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Suggested Quick Prompts Bar -->
+          <div class="ai-prompts-bar" aria-label="Suggested prompts">
+            <span class="prompts-label">Quick actions:</span>
+            <button class="ai-prompt-chip" data-prompt="Prioritise my tasks.">
+              <span>🎯 Prioritise my tasks</span>
+            </button>
+            <button class="ai-prompt-chip" data-prompt="Plan my day.">
+              <span>📅 Plan my day</span>
+            </button>
+            <button class="ai-prompt-chip" data-prompt="What should I complete first?">
+              <span>⚡ What should I complete first?</span>
+            </button>
+            <button class="ai-prompt-chip" data-prompt="Show my urgent tasks.">
+              <span>⚠️ Show my urgent tasks</span>
+            </button>
+            <button class="ai-prompt-chip" data-prompt="Help me manage my workload.">
+              <span>💡 Help me manage workload</span>
+            </button>
+          </div>
+
+          <!-- Chat Messages Area -->
+          <div id="aiChatHistory" class="ai-chat-history">
+            
+            <!-- Default Welcome Message -->
+            <div class="ai-msg-row ai-msg-assistant">
+              <div class="ai-msg-avatar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="8" width="18" height="12" rx="3.5"></rect>
+                  <path d="M12 4v4"></path>
+                  <circle cx="12" cy="3" r="1.2" fill="currentColor"></circle>
+                  <circle cx="8.5" cy="13" r="1.5" fill="currentColor"></circle>
+                  <circle cx="15.5" cy="13" r="1.5" fill="currentColor"></circle>
+                  <path d="M9.5 16.5c1 .5 4 .5 5 0"></path>
+                  <path d="M1.5 13h1.5"></path>
+                  <path d="M21 13h1.5"></path>
+                </svg>
+              </div>
+              <div class="ai-msg-bubble">
+                <p><strong>Hello! I'm TASKIT AI</strong> — your personal productivity assistant.</p>
+                <p>I analyze your priorities, deadlines, and active tasks to help you plan smarter and eliminate overwhelm. Here are a few things you can ask me to do:</p>
+                <ul class="ai-feature-list">
+                  <li><strong>Intelligent Prioritization:</strong> Ask <em>"Prioritise my tasks"</em> to see an optimal order based on urgency and deadlines.</li>
+                  <li><strong>Daily Schedule:</strong> Ask <em>"Plan my day"</em> for a structured timeline with focus blocks and breaks.</li>
+                  <li><strong>Natural Language Input:</strong> Tell me <em>"I need to finish my report by tomorrow and prepare slides by Friday"</em> to parse and queue multiple tasks automatically.</li>
+                </ul>
+                <p class="ai-disclaimer-note"><em>Note: AI recommendations are advisory. You always maintain full control over task deadlines and priorities.</em></p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Typing / Processing Indicator -->
+          <div id="aiThinkingIndicator" class="ai-thinking-row" style="display: none;">
+            <div class="ai-thinking-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="ai-thinking-text">TASKIT AI is analyzing your tasks...</span>
+          </div>
+
+          <!-- Chat Input Bar -->
+          <form id="aiChatForm" class="ai-input-form">
+            <div class="ai-input-wrapper">
+              <input
+                type="text"
+                id="aiChatInput"
+                class="ai-text-input"
+                placeholder="Ask TASKIT AI or describe tasks naturally (e.g. 'Plan my day' or 'Finish Java assignment by tomorrow')..."
+                autocomplete="off">
+              <button type="submit" id="aiSendBtn" class="ai-send-btn" aria-label="Send message">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       ADD / EDIT TASK MODAL
+       ========================================================================= -->
+  <div id="taskModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-window">
+      
+      <header class="modal-header">
+        <div class="modal-title-group">
+          <h3 id="modalTitle" class="modal-heading">Add New Task</h3>
+          <p id="modalSubtitle" class="modal-subheading">Fill in the details below to organize your task.</p>
+        </div>
+        <button id="closeModalBtn" class="modal-close-btn" aria-label="Close dialog">&times;</button>
+      </header>
+
+      <form id="taskForm" class="modal-form" novalidate>
+        <input type="hidden" id="taskEditId">
+
+        <div class="form-field">
+          <label for="taskTitleInput" class="form-label">Task Title <span class="required-star">*</span></label>
+          <input
+            type="text"
+            id="taskTitleInput"
+            class="form-input"
+            placeholder="e.g. Conduct quarterly infrastructure review"
+            required>
+        </div>
+
+        <div class="form-field">
+          <label for="taskDescInput" class="form-label">Description & Notes</label>
+          <textarea
+            id="taskDescInput"
+            class="form-textarea"
+            rows="3"
+            placeholder="Add relevant context, checklist items, or deliverables..."></textarea>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="taskDueDateInput" class="form-label">Due Date</label>
+            <input
+              type="date"
+              id="taskDueDateInput"
+              class="form-input">
+          </div>
+
+          <div class="form-field">
+            <label for="taskPrioritySelect" class="form-label">Priority</label>
+            <select id="taskPrioritySelect" class="form-select">
+              <option value="LOW">Low (Soft Green)</option>
+              <option value="MEDIUM" selected>Medium (Soft Amber)</option>
+              <option value="HIGH">High (Soft Red)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="cancelModalBtn" class="btn-cancel">Cancel</button>
+          <button type="submit" id="saveTaskBtn" class="btn-primary-amber">
+            <span class="btn-text">Save Task</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       NATURAL LANGUAGE TASK PARSER MODAL
+       ========================================================================= -->
+  <div id="nlpModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-window modal-nlp-window">
+      <header class="modal-header">
+        <div class="modal-title-group">
+          <h3 class="modal-heading">✨ Natural Language Task Input</h3>
+          <p class="modal-subheading">Describe your tasks in plain English. TASKIT AI will extract titles, deadlines, and priorities.</p>
+        </div>
+        <button id="closeNlpModalBtn" class="modal-close-btn" aria-label="Close dialog">&times;</button>
+      </header>
+
+      <div class="modal-form">
+        <div class="form-field">
+          <label for="nlpTextInput" class="form-label">Describe your tasks:</label>
+          <textarea
+            id="nlpTextInput"
+            class="form-textarea"
+            rows="4"
+            placeholder="e.g. I need to complete my Java assignment by tomorrow, prepare for my DSA exam on Wednesday, and finish my project presentation by Sunday."></textarea>
+        </div>
+
+        <button type="button" id="nlpParseBtn" class="btn-primary-amber" style="width: 100%;">
+          <span>Analyze & Extract Tasks</span>
+        </button>
+
+        <!-- Container for extracted preview -->
+        <div id="nlpPreviewContainer" style="display: none; margin-top: 1rem;">
+          <h4 class="nlp-preview-title">Review Extracted Tasks:</h4>
+          <p class="nlp-preview-sub">Review each task before confirming. Uncheck any task you do not want to add.</p>
+          <div id="nlpExtractedList" class="nlp-extracted-list"></div>
+
+          <div class="modal-footer" style="margin-top: 1.25rem;">
+            <button type="button" id="nlpCancelBtn" class="btn-cancel">Discard</button>
+            <button type="button" id="nlpConfirmBtn" class="btn-primary-amber">
+              <span>Confirm & Save Tasks</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       DELETE CONFIRMATION MODAL
+       ========================================================================= -->
+  <div id="deleteConfirmModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-window modal-confirm-window">
+      <div class="confirm-icon-wrap">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6h18"></path>
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+          <line x1="10" y1="11" x2="10" y2="17"></line>
+          <line x1="14" y1="11" x2="14" y2="17"></line>
+        </svg>
+      </div>
+      <h3 class="confirm-heading">Delete this task?</h3>
+      <p class="confirm-text">Are you sure you want to delete "<strong id="deleteTaskTitleDisplay">this task</strong>"? This action cannot be undone.</p>
+      
+      <div class="modal-footer confirm-footer">
+        <button type="button" id="cancelDeleteBtn" class="btn-cancel">Keep Task</button>
+        <button type="button" id="confirmDeleteBtn" class="btn-danger-red">Delete Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pure Vanilla Scripts (Zero Frameworks, Zero React) -->
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

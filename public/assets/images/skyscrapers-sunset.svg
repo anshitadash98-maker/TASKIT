@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Sunset Sky Gradient -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c0f0a" />
+      <stop offset="35%" stop-color="#3d1b10" />
+      <stop offset="60%" stop-color="#7c2d12" />
+      <stop offset="78%" stop-color="#c2410c" />
+      <stop offset="90%" stop-color="#ea580c" />
+      <stop offset="96%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+
+    <!-- Sun Glow -->
+    <radialGradient id="sunGlow" cx="45%" cy="85%" r="45%">
+      <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.95" />
+      <stop offset="18%" stop-color="#fde68a" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#f59e0b" stop-opacity="0.6" />
+      <stop offset="70%" stop-color="#ea580c" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#7c2d12" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Golden Glass Reflection 1 -->
+    <linearGradient id="glassGold1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#451a03" />
+      <stop offset="25%" stop-color="#b45309" />
+      <stop offset="55%" stop-color="#f59e0b" />
+      <stop offset="85%" stop-color="#fef3c7" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#78350f" />
+    </linearGradient>
+
+    <!-- Golden Glass Reflection 2 -->
+    <linearGradient id="glassGold2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#291104" />
+      <stop offset="30%" stop-color="#78350f" />
+      <stop offset="60%" stop-color="#d97706" />
+      <stop offset="85%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#92400e" />
+    </linearGradient>
+
+    <!-- Golden Glass Reflection 3 -->
+    <linearGradient id="glassGold3" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1e0b02" />
+      <stop offset="40%" stop-color="#9a3412" />
+      <stop offset="70%" stop-color="#f59e0b" />
+      <stop offset="92%" stop-color="#fffbeb" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#78350f" />
+    </linearGradient>
+
+    <!-- Water/Bay Reflection Gradient -->
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.8" />
+      <stop offset="25%" stop-color="#c2410c" stop-opacity="0.6" />
+      <stop offset="70%" stop-color="#431407" />
+      <stop offset="100%" stop-color="#1c0a03" />
+    </linearGradient>
+
+    <pattern id="windowGrid1" width="16" height="24" patternUnits="userSpaceOnUse">
+      <rect width="12" height="18" fill="#fef3c7" fill-opacity="0.35" rx="1" />
+      <line x1="0" y1="23" x2="16" y2="23" stroke="#451a03" stroke-width="1.5" />
+      <line x1="15" y1="0" x2="15" y2="24" stroke="#451a03" stroke-width="1.5" />
+    </pattern>
+
+    <pattern id="windowGrid2" width="22" height="32" patternUnits="userSpaceOnUse">
+      <rect width="16" height="24" fill="#fbbf24" fill-opacity="0.25" rx="1" />
+      <line x1="0" y1="31" x2="22" y2="31" stroke="#291104" stroke-width="2" />
+      <line x1="21" y1="0" x2="21" y2="32" stroke="#291104" stroke-width="2" />
+    </pattern>
+
+    <filter id="bloom">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Sky Background -->
+  <rect width="1920" height="1080" fill="url(#skyGrad)" />
+
+  <!-- Massive Setting Sun -->
+  <circle cx="880" cy="740" r="280" fill="url(#sunGlow)" filter="url(#bloom)" />
+  <circle cx="880" cy="740" r="110" fill="#fffbeb" opacity="0.85" filter="url(#bloom)" />
+
+  <!-- Distant Mountain/Hills Silhouettes -->
+  <path d="M0 780 Q320 730 640 760 T1280 740 T1920 765 L1920 860 L0 860 Z" fill="#2d1309" opacity="0.8" />
+  <path d="M0 810 Q450 780 900 800 T1800 790 L1920 805 L1920 880 L0 880 Z" fill="#1e0c05" />
+
+  <!-- Back Layer of Distant Glass Towers -->
+  <g opacity="0.55">
+    <rect x="220" y="480" width="90" height="380" fill="url(#glassGold2)" />
+    <polygon points="220,480 265,420 310,480" fill="#f59e0b" opacity="0.7" />
+    <rect x="360" y="440" width="110" height="420" fill="url(#glassGold1)" />
+    <rect x="520" y="380" width="85" height="480" fill="url(#glassGold3)" />
+    <rect x="1100" y="460" width="95" height="400" fill="url(#glassGold2)" />
+    <rect x="1240" y="410" width="120" height="450" fill="url(#glassGold1)" />
+    <rect x="1410" y="490" width="80" height="370" fill="url(#glassGold3)" />
+    <rect x="1530" y="430" width="105" height="430" fill="url(#glassGold2)" />
+  </g>
+
+  <!-- Mid Layer Towers -->
+  <g opacity="0.85">
+    <!-- Angular Faceted Tower Left -->
+    <polygon points="120,860 120,380 180,310 240,360 240,860" fill="url(#glassGold1)" />
+    <polygon points="180,310 240,360 240,860 180,860" fill="url(#glassGold3)" opacity="0.9" />
+    
+    <!-- Stepped Skyscraper -->
+    <rect x="420" y="260" width="140" height="600" fill="url(#glassGold2)" />
+    <rect x="445" y="190" width="90" height="70" fill="url(#glassGold1)" />
+    <rect x="475" y="120" width="30" height="70" fill="#fef3c7" opacity="0.95" />
+    <line x1="490" y1="60" x2="490" y2="120" stroke="#f59e0b" stroke-width="3" />
+    
+    <!-- Tower Right Mid -->
+    <polygon points="1020,860 1020,290 1110,230 1180,270 1180,860" fill="url(#glassGold1)" />
+    <polygon points="1110,230 1180,270 1180,860 1110,860" fill="url(#glassGold3)" />
+    
+    <!-- Modern Slanted Glass Spire -->
+    <polygon points="1320,860 1320,320 1420,180 1460,240 1460,860" fill="url(#glassGold2)" />
+    <polygon points="1420,180 1460,240 1460,860 1420,860" fill="url(#glassGold1)" opacity="0.8" />
+  </g>
+
+  <!-- Foreground Golden Glass Supertalls (High Detail & Glazing) -->
+  <!-- Tower A: Left Golden Glass Tower with illuminated window grid -->
+  <g id="towerA">
+    <rect x="260" y="160" width="170" height="700" fill="url(#glassGold1)" />
+    <rect x="260" y="160" width="170" height="700" fill="url(#windowGrid1)" />
+    <!-- Diagonal golden sunset reflection slice -->
+    <polygon points="260,380 430,220 430,340 260,500" fill="#fffbeb" opacity="0.3" filter="url(#bloom)" />
+    <!-- Crown -->
+    <polygon points="260,160 345,90 430,160" fill="#fef3c7" opacity="0.9" />
+    <line x1="345" y1="40" x2="345" y2="90" stroke="#fef3c7" stroke-width="4" filter="url(#bloom)" />
+  </g>
+
+  <!-- Tower B: Center-Left Modern Curved Glass Monolith -->
+  <g id="towerB">
+    <polygon points="620,860 620,210 770,140 820,180 820,860" fill="url(#glassGold3)" />
+    <polygon points="620,210 770,140 770,860 620,860" fill="url(#glassGold1)" />
+    <rect x="625" y="220" width="140" height="640" fill="url(#windowGrid2)" />
+    <!-- Bright Edge Highlights -->
+    <line x1="770" y1="140" x2="770" y2="860" stroke="#fffbeb" stroke-width="3" filter="url(#bloom)" opacity="0.85" />
+    <line x1="620" y1="210" x2="770" y2="140" stroke="#fbbf24" stroke-width="3" />
+  </g>
+
+  <!-- Tower C: Iconic Tall Spire directly framing sunset -->
+  <g id="towerC">
+    <rect x="850" y="280" width="130" height="580" fill="url(#glassGold2)" />
+    <polygon points="850,280 915,160 980,280" fill="url(#glassGold1)" />
+    <line x1="915" y1="80" x2="915" y2="160" stroke="#fffbeb" stroke-width="5" filter="url(#bloom)" />
+    <rect x="855" y="300" width="120" height="560" fill="url(#windowGrid1)" opacity="0.6" />
+  </g>
+
+  <!-- Tower D: Right Primary Glass Megastructure -->
+  <g id="towerD">
+    <polygon points="1490,860 1490,140 1620,80 1700,120 1700,860" fill="url(#glassGold1)" />
+    <polygon points="1620,80 1700,120 1700,860 1620,860" fill="url(#glassGold3)" />
+    <rect x="1495" y="150" width="120" height="710" fill="url(#windowGrid2)" />
+    <line x1="1620" y1="80" x2="1620" y2="860" stroke="#fffbeb" stroke-width="4" filter="url(#bloom)" opacity="0.8" />
+    <polygon points="1490,420 1620,280 1620,410 1490,550" fill="#fffbeb" opacity="0.25" filter="url(#bloom)" />
+  </g>
+
+  <!-- Tower E: Far Right Edge Framing Skyscraper -->
+  <g id="towerE">
+    <rect x="1720" y="240" width="200" height="620" fill="url(#glassGold2)" />
+    <rect x="1720" y="240" width="200" height="620" fill="url(#windowGrid1)" />
+    <polygon points="1720,240 1820,170 1920,240" fill="#f59e0b" opacity="0.8" />
+  </g>
+
+  <!-- Waterfront Harbor Horizon & Shimmering Waves Reflection -->
+  <rect x="0" y="860" width="1920" height="220" fill="url(#waterGrad)" />
+
+  <!-- Shimmering Golden Light Streaks Across Water -->
+  <g opacity="0.75" filter="url(#bloom)">
+    <ellipse cx="880" cy="875" rx="240" ry="8" fill="#fffbeb" />
+    <ellipse cx="880" cy="895" rx="310" ry="11" fill="#fef3c7" opacity="0.9" />
+    <ellipse cx="880" cy="925" rx="390" ry="15" fill="#fde68a" opacity="0.8" />
+    <ellipse cx="880" cy="960" rx="460" ry="18" fill="#f59e0b" opacity="0.7" />
+    <ellipse cx="880" cy="1005" rx="540" ry="22" fill="#d97706" opacity="0.6" />
+    <ellipse cx="880" cy="1050" rx="640" ry="26" fill="#b45309" opacity="0.4" />
+  </g>
+
+  <!-- Subtle Ambient Vignette -->
+  <radialGradient id="ambientVignette" cx="50%" cy="50%" r="70%">
+    <stop offset="60%" stop-color="#000000" stop-opacity="0" />
+    <stop offset="100%" stop-color="#050201" stop-opacity="0.65" />
+  </radialGradient>
+  <rect width="1920" height="1080" fill="url(#ambientVignette)" />
+</svg>

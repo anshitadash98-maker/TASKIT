@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TASKIT — Plan Smarter. Stay Focused. Get Things Done.</title>
+  <meta name="description" content="TASKIT — Organize your everyday tasks, manage your priorities and stay on top of everything that matters.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/taskora-logo.svg">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <!-- Full-Screen Atmospheric Background: Golden Glass Skyscrapers at Sunset -->
+  <div class="bg-video-container" aria-hidden="true">
+    <!-- Muted, Autoplaying, Looping HTML5 Background Video -->
+    <video
+      id="bgVideo"
+      class="bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="assets/images/skyscrapers-sunset.svg"
+      preload="auto">
+      <!-- High quality royalty-free video stream / video source -->
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-city-skyscrapers-at-sunset-41407-large.mp4" type="video/mp4">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-sunset-over-the-city-skyline-41409-large.mp4" type="video/mp4">
+    </video>
+
+    <!-- Warm Amber Scrim Overlay for WCAG AA Text Contrast -->
+    <div class="bg-scrim-overlay"></div>
+    <div class="bg-ambient-glow"></div>
+  </div>
+
+  <!-- Page Content Wrapper -->
+  <main class="login-page-wrapper">
+    <div class="login-grid">
+
+      <!-- LEFT SECTION: Branding, Headline, Supporting Text & Slider Dots -->
+      <section class="brand-showcase">
+        
+        <!-- Application Logo & Name -->
+        <a href="/" class="brand-logo-badge" title="TASKIT Task Tracker">
+          <div class="brand-icon-wrapper">
+            <img src="assets/icons/taskora-logo.svg" alt="TASKIT Logo" width="46" height="46">
+          </div>
+          <span class="brand-title">TASKIT<span>.</span></span>
+        </a>
+
+        <!-- Operational Category Badge -->
+        <div class="brand-tag">
+          <span class="brand-tag-dot"></span>
+          <span>Productivity Tracker</span>
+        </div>
+
+        <!-- Large Headline -->
+        <h1 class="brand-headline" id="heroHeadline">
+          Plan Smarter. <span class="highlight-amber">Stay Focused.</span> Get Things Done.
+        </h1>
+
+        <!-- Supporting Text -->
+        <p class="brand-supporting" id="heroSupporting">
+          Organize your everyday tasks, manage your priorities and stay on top of everything that matters.
+        </p>
+
+        <!-- Clickable Slider Dots with Feature Indicator -->
+        <div class="slider-control-bar" role="tablist" aria-label="Feature showcase slides">
+          <button class="slider-dot is-active" data-slide="0" role="tab" aria-selected="true" aria-label="Feature slide 1: Everyday Task Management"></button>
+          <button class="slider-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Feature slide 2: C2 Priority Tracking"></button>
+          <button class="slider-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Feature slide 3: Kanban & Focus Flow"></button>
+          <span class="slider-feature-label" id="sliderFeatureLabel">Everyday Task Mastery</span>
+        </div>
+
+      </section>
+
+      <!-- RIGHT SECTION: Clean White Login Card -->
+      <section class="auth-card-container">
+        <div class="auth-card">
+
+          <!-- Alert Notification Banner (Dynamic for errors & successes) -->
+          <div id="alertBanner" class="alert-banner" role="alert">
+            <svg id="alertIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span id="alertMessage"></span>
+          </div>
+
+          <!-- ==========================================
+               LOGIN VIEW
+               ========================================== -->
+          <div id="loginView" class="form-view is-visible">
+            <header class="card-header">
+              <h2 class="card-title">Welcome Back!</h2>
+              <p class="card-subtitle">Log in to continue organizing your day.</p>
+            </header>
+
+            <form id="loginForm" class="auth-form" novalidate>
+              
+              <!-- Email Input Field -->
+              <div class="form-group">
+                <label for="loginEmail" class="form-label">Email Address</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                  </span>
+                  <input
+                    type="email"
+                    id="loginEmail"
+                    name="email"
+                    class="form-input"
+                    placeholder="name@organization.com"
+                    autocomplete="email"
+                    required>
+                </div>
+              </div>
+
+              <!-- Password Input Field with Visibility Toggle -->
+              <div class="form-group">
+                <label for="loginPassword" class="form-label">Password</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </span>
+                  <input
+                    type="password"
+                    id="loginPassword"
+                    name="password"
+                    class="form-input"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required>
+                  <button
+                    type="button"
+                    id="passwordToggleBtn"
+                    class="password-toggle-btn"
+                    aria-label="Toggle password visibility">
+                    <!-- Eye Icon (Default) -->
+                    <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <!-- Eye-Off Icon (Hidden initially) -->
+                    <svg id="eyeOffIcon" style="display: none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                      <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                      <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                      <line x1="2" y1="2" x2="22" y2="22"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Remember Me & Forgot Password Link -->
+              <div class="form-options-row">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="rememberMe" name="rememberMe">
+                  <span>Remember me</span>
+                </label>
+                <a href="#forgot" id="forgotPasswordLink" class="forgot-password-link">Forgot Password?</a>
+              </div>
+
+              <!-- Primary Login Button -->
+              <button type="submit" id="loginSubmitBtn" class="btn-primary">
+                <span class="btn-spinner"></span>
+                <span class="btn-text">Log In</span>
+              </button>
+
+              <!-- Conditional Google Login Button (Rendered ONLY if Google OAuth is configured) -->
+              <div id="googleAuthSection" style="display: none;">
+                <div class="oauth-divider">
+                  <span>Or continue with</span>
+                </div>
+                <button type="button" id="googleLoginBtn" class="btn-google">
+                  <svg viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                  </svg>
+                  <span>Sign in with Google</span>
+                </button>
+              </div>
+
+            </form>
+
+            <!-- Card Footer: Sign-Up Link for New Users -->
+            <footer class="card-footer">
+              Don't have an account?
+              <a href="#signup" id="showRegisterLink" class="toggle-form-link">Sign up</a>
+            </footer>
+
+            <!-- Quick Demo Helper (Convenient One-Click Testing) -->
+            <div class="demo-credentials-box">
+              <div class="demo-info">
+                <strong>Demo:</strong> demo@taskora.com<br>
+                <strong>Pass:</strong> Taskora123!
+              </div>
+              <button type="button" id="autofillDemoBtn" class="btn-autofill">Quick Fill</button>
+            </div>
+
+          </div>
+
+          <!-- ==========================================
+               REGISTER VIEW (TOGGLED CLEANLY IN CARD)
+               ========================================== -->
+          <div id="registerView" class="form-view">
+            <header class="card-header">
+              <h2 class="card-title">Join TASKIT</h2>
+              <p class="card-subtitle">Create an account to track your daily goals.</p>
+            </header>
+
+            <form id="registerForm" class="auth-form" novalidate>
+              <div class="form-group">
+                <label for="regFullName" class="form-label">Full Name</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </span>
+                  <input
+                    type="text"
+                    id="regFullName"
+                    name="fullName"
+                    class="form-input"
+                    placeholder="e.g. Alex Vance"
+                    required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="regEmail" class="form-label">Email Address</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                  </span>
+                  <input
+                    type="email"
+                    id="regEmail"
+                    name="email"
+                    class="form-input"
+                    placeholder="name@organization.com"
+                    required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="regPassword" class="form-label">Password (Min. 6 characters)</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </span>
+                  <input
+                    type="password"
+                    id="regPassword"
+                    name="password"
+                    class="form-input"
+                    placeholder="Create a secure password"
+                    required>
+                </div>
+              </div>
+
+              <button type="submit" id="registerSubmitBtn" class="btn-primary">
+                <span class="btn-spinner"></span>
+                <span class="btn-text">Create Account</span>
+              </button>
+            </form>
+
+            <footer class="card-footer">
+              Already have an account?
+              <a href="#login" id="showLoginLink" class="toggle-form-link">Log in</a>
+            </footer>
+          </div>
+
+          <!-- ==========================================
+               FORGOT PASSWORD NOTICE VIEW
+               ========================================== -->
+          <div id="forgotView" class="form-view">
+            <header class="card-header">
+              <h2 class="card-title">Reset Password</h2>
+              <p class="card-subtitle">Enter your email to receive recovery instructions.</p>
+            </header>
+
+            <form id="forgotForm" class="auth-form" novalidate>
+              <div class="form-group">
+                <label for="forgotEmail" class="form-label">Email Address</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                  </span>
+                  <input
+                    type="email"
+                    id="forgotEmail"
+                    name="email"
+                    class="form-input"
+                    placeholder="name@organization.com"
+                    required>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary">
+                <span class="btn-text">Send Instructions</span>
+              </button>
+            </form>
+
+            <footer class="card-footer">
+              Remember your password?
+              <a href="#login" id="backToLoginFromForgot" class="toggle-form-link">Back to Log In</a>
+            </footer>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Pure Vanilla Scripts (Strictly Zero React / Frameworks) -->
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
